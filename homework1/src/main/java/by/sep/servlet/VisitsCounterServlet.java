@@ -13,7 +13,7 @@ import java.io.*;
 @WebServlet(name = "VisitsCounterServlet", urlPatterns = "/visitscounter")
 public class VisitsCounterServlet extends HttpServlet {
     private int visitsCounter;
-    File counterFile = new File(System.getProperty("user.dir") + "/counter.txt");
+    File counterFile = new File("/d/work/homework/homework1/src/main/resources/counter.txt");
 
     @Override
     public void init(ServletConfig config) throws ServletException {
