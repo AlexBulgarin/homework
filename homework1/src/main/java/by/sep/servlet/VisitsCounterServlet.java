@@ -8,22 +8,24 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
-@WebServlet(name = "VisitsCounterServlet", urlPatterns = "/visitscounter")
+@WebServlet(name = "VisitsCounter", urlPatterns = "/visitscounter")
 public class VisitsCounterServlet extends HttpServlet {
-    private int visitsCounter;
-    File counterFile = new File("/d/work/homework/homework1/src/main/resources/counter.txt");
+    private AtomicInteger visitsCounter;
+    File counterFile = new File("/d/work/homework/homework1/" +
+            "src/main/java/by/sep/counter.txt");
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
             if (counterFile.createNewFile()) {
-                visitsCounter = 0;
+                visitsCounter = new AtomicInteger(0);
             } else {
                 try (BufferedReader bufferedReader = new BufferedReader(new FileReader(counterFile))) {
-                    visitsCounter = Integer.parseInt(bufferedReader.readLine());
+                    visitsCounter = new AtomicInteger(Integer.parseInt(bufferedReader.readLine()));
                 }
             }
         } catch (IOException e) {
@@ -33,7 +35,7 @@ public class VisitsCounterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        visitsCounter++;
+        visitsCounter.incrementAndGet();
         try (FileWriter fileWriter = new FileWriter(counterFile)) {
             fileWriter.write(String.valueOf(visitsCounter));
             fileWriter.flush();
