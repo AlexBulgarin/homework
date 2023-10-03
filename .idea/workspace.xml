@@ -7,7 +7,7 @@
     <list default="true" id="e4c98079-e165-4697-95b1-709fed8689ec" name="Changes" comment="homework1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/BrowserDetectorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/BrowserDetectorServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,8 +146,27 @@
       <option name="project" value="LOCAL" />
       <updated>1696284696408</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="homework1">
+      <option name="closed" value="true" />
+      <created>1696363669293</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1696363669293</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
