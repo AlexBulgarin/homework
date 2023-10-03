@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4c98079-e165-4697-95b1-709fed8689ec" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" afterDir="false" />
+    <list default="true" id="e4c98079-e165-4697-95b1-709fed8689ec" name="Changes" comment="homework1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1/src/main/resources/counter.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/BrowserDetectorServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/BrowserDetectorServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,12 +122,37 @@
       <option name="project" value="LOCAL" />
       <updated>1696202814065</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="test">
+      <option name="closed" value="true" />
+      <created>1696278302695</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1696278302695</updated>
+    </task>
+    <task id="LOCAL-00010" summary="test">
+      <option name="closed" value="true" />
+      <created>1696280649017</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1696280649017</updated>
+    </task>
+    <task id="LOCAL-00011" summary="homework1">
+      <option name="closed" value="true" />
+      <created>1696284696408</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1696284696408</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="homework1" />
+    <option name="LAST_COMMIT_MESSAGE" value="homework1" />
   </component>
 </project>

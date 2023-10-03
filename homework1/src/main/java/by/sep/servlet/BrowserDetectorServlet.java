@@ -17,12 +17,14 @@ public class BrowserDetectorServlet extends HttpServlet {
         String browser;
         if (info.contains("Firefox")) {
             browser = "Firefox";
-        } else if (info.contains("Chrome")) {
-            browser = "Chrome";
-        } else if (info.contains("OPR|opera")) {
+        } else if (info.contains("YaBrowser")) {
+            browser = "Yandex";
+        } else if (info.contains("OPR")) {
             browser = "Opera";
         } else if (info.contains("Edg")) {
             browser = "Microsoft Edge";
+        } else if (info.contains("Chrome")) {
+            browser = "Chrome";
         } else if (info.contains("Safari")) {
             browser = "Safari";
         } else {
