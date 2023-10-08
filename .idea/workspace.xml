@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e4c98079-e165-4697-95b1-709fed8689ec" name="Changes" comment="homework1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/counter.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/homework1/src/main/java/by/sep/servlet/VisitsCounterServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +22,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AlexBulgarin"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="78273f1b-2926-4970-9759-4fdd83eedc5c" />
+        <option name="url" value="https://github.com/AlexBulgarin/homework" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -46,7 +60,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.gutterIcons"
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -162,7 +176,31 @@
       <option name="project" value="LOCAL" />
       <updated>1696365497869</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="homework1">
+      <option name="closed" value="true" />
+      <created>1696368071689</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1696368071689</updated>
+    </task>
+    <task id="LOCAL-00015" summary="homework1">
+      <option name="closed" value="true" />
+      <created>1696368131422</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1696368131422</updated>
+    </task>
+    <task id="LOCAL-00016" summary="homework1">
+      <option name="closed" value="true" />
+      <created>1696368221783</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1696368221783</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,5 +219,9 @@
     <MESSAGE value="test" />
     <MESSAGE value="homework1" />
     <option name="LAST_COMMIT_MESSAGE" value="homework1" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @WebServlet(name = "VisitsCounter", urlPatterns = "/visitscounter.html")
 public class VisitsCounterServlet extends HttpServlet {
     private AtomicInteger visitsCounter;
-    File counterFile = new File("/d/work/homework/homework1/" + "src/main/java/by/sep/counter.txt");
+    File counterFile = new File("/d/work/homework/homework1/src/main/java/by/sep/counter.txt");
 
     @Override
     public void init(ServletConfig config) throws ServletException {
