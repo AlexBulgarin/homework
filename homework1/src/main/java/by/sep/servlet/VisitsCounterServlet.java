@@ -43,10 +43,10 @@ public class VisitsCounterServlet extends HttpServlet {
             fileWriter.flush();
         }
         resp.setContentType("image/jpeg");
-        BufferedImage image = new BufferedImage(500, 200, BufferedImage.TYPE_INT_RGB);
+        BufferedImage image = new BufferedImage(400, 200, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = image.createGraphics();
-        graphics.setFont(new Font("Serif", Font.ITALIC, 48));
-        graphics.setColor(Color.GREEN);
+        graphics.setFont(new Font("Arial", Font.ITALIC, 30));
+        graphics.setColor(Color.ORANGE);
         graphics.drawString(text, 100, 100);
         ServletOutputStream servletOutputStream = resp.getOutputStream();
         ImageIO.write(image, "jpeg", servletOutputStream);
