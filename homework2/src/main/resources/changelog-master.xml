@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="abulgarin">
+        <sql>
+            CREATE TABLE expenses (
+            num INT NOT NULL AUTO_INCREMENT,
+            paydate DATE NULL,
+            receiver INT NULL,
+            value DECIMAL(7,2) NULL,
+            PRIMARY KEY (num));
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="abulgarin">
+        <sql>
+            CREATE TABLE receivers (
+            num INT NOT NULL,
+            name VARCHAR(255) NULL,
+            PRIMARY KEY (num));
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="abulgarin">
+        <sql>
+            INSERT INTO receivers VALUES (1, 'Интернет-магазин "21 век"');
+            INSERT INTO receivers VALUES (2, 'Интернет-магазин "Wildberries"');
+            INSERT INTO receivers VALUES (3, 'Гипермаркет "Евроопт"');
+            INSERT INTO receivers VALUES (4, 'Гипермаркет "Green"');
+            INSERT INTO receivers VALUES (5, 'Кофейня "Simple People"');
+            INSERT INTO receivers VALUES (6, 'Пиццерия "Dominos"');
+            INSERT INTO receivers VALUES (7, 'Суши-ресторан "Sushigo"');
+            INSERT INTO receivers VALUES (8, '"МТС"');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
