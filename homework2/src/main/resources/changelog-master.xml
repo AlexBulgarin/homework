@@ -8,7 +8,7 @@
     <changeSet id="1" author="abulgarin">
         <sql>
             CREATE TABLE expenses (
-            num INT NOT NULL AUTO_INCREMENT,
+            num INT NOT NULL,
             paydate DATE NULL,
             receiver INT NULL,
             value DECIMAL(7,2) NULL,
@@ -38,4 +38,20 @@
         </sql>
     </changeSet>
 
+    <changeSet id="4" author="abulgarin">
+        <sql>
+            INSERT INTO expenses VALUES (1, '2023-03-14', 1, 35.54);
+            INSERT INTO expenses VALUES (2, '2023-03-14', 6, 88.21);
+            INSERT INTO expenses VALUES (3, '2023-03-25', 4, 13.28);
+            INSERT INTO expenses VALUES (4, '2023-04-05', 8, 110.30);
+            INSERT INTO expenses VALUES (5, '2023-04-05', 2, 14.50);
+            INSERT INTO expenses VALUES (6, '2023-04-05', 4, 133.25);
+            INSERT INTO expenses VALUES (7, '2023-04-20', 1, 50.50);
+            INSERT INTO expenses VALUES (8, '2023-05-03', 7, 25.25);
+            INSERT INTO expenses VALUES (9, '2023-05-03', 3, 29.15);
+            INSERT INTO expenses VALUES (10, '2023-05-15', 5, 8.87);
+            INSERT INTO expenses VALUES (11, '2023-05-19', 5, 12.13);
+            INSERT INTO expenses VALUES (12, '2023-05-19', 1, 85.84);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
