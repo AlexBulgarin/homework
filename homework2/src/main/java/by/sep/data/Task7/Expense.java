@@ -3,6 +3,7 @@ package by.sep.data.Task7;
 import java.io.Serializable;
 
 public class Expense implements Serializable {
+    private static final long serialVersionUID = 5145593946132557416L;
     private Integer num;
     private String paydate;
     private Integer receiver;
