@@ -3,8 +3,6 @@ package by.sep.data.dao;
 import by.sep.data.pojo.Expense;
 import by.sep.data.pojo.Receiver;
 
-import java.sql.SQLException;
-
 public interface ListExpensesDao {
     Receiver getReceiver(int num);
 
@@ -19,6 +17,10 @@ public interface ListExpensesDao {
     boolean updateReceiver(int num, String newName);
 
     boolean updateExpense(int num, String newPayDate, int newReceiver, double newValue);
+
+    void refreshReceiverFromDataBase(Receiver receiver);
+
+    void refreshExpenseFromDataBase(Expense expense);
 
     boolean deleteReceiver(int num);
 

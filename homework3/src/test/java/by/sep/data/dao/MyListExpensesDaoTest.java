@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class MyListExpensesDaoTest {
     MyListExpensesDao myDao;
     int testNum = 1;
-    int testNum1 = 99;
+    int wrongTestNum = 99;
     String testName = "Test Name";
     String testPayDate = "2023-10-30";
     int testReceiver = 1;
@@ -54,7 +54,7 @@ public class MyListExpensesDaoTest {
     @Test
     public void testGetReceiver() {
         Receiver receiver = myDao.getReceiver(testNum);
-        Receiver receiver1 = myDao.getReceiver(testNum1);
+        Receiver receiver1 = myDao.getReceiver(wrongTestNum);
         assertNotNull(receiver);
         assertEquals(testName, receiver.getName());
         assertEquals(Integer.valueOf(testNum), receiver.getNum());
@@ -64,11 +64,11 @@ public class MyListExpensesDaoTest {
     @Test
     public void testLoadReceiver() {
         Receiver receiver = myDao.loadReceiver(testNum);
-        Receiver receiver1 = myDao.loadReceiver(testNum1);
+        Receiver receiver1 = myDao.loadReceiver(wrongTestNum);
         assertNotNull(receiver);
         assertEquals(Integer.valueOf(testNum), receiver.getNum());
         assertNotNull(receiver1);
-        assertEquals(Integer.valueOf(testNum1), receiver1.getNum());
+        assertEquals(Integer.valueOf(wrongTestNum), receiver1.getNum());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class MyListExpensesDaoTest {
     public void testUpdateReceiver() throws SQLException, ClassNotFoundException {
         String newTestName = "NewTestName";
         boolean result = myDao.updateReceiver(testNum, newTestName);
-        boolean result1 = myDao.updateReceiver(testNum1, newTestName);
+        boolean result1 = myDao.updateReceiver(wrongTestNum, newTestName);
         assertTrue(result);
         assertFalse(result1);
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {
@@ -127,12 +127,12 @@ public class MyListExpensesDaoTest {
     }
 
     @Test
-    public void updateExpense() throws SQLException, ClassNotFoundException {
+    public void testUpdateExpense() throws SQLException, ClassNotFoundException {
         String newTestPayDate = "2023-11-02";
         int newTestReceiver = 1;
         double newTestValue = 103.87;
         boolean result = myDao.updateExpense(testNum, newTestPayDate, newTestReceiver, newTestValue);
-        boolean result1 = myDao.updateExpense(testNum1, newTestPayDate, newTestReceiver, newTestValue);
+        boolean result1 = myDao.updateExpense(wrongTestNum, newTestPayDate, newTestReceiver, newTestValue);
         assertTrue(result);
         assertFalse(result1);
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {
@@ -149,9 +149,33 @@ public class MyListExpensesDaoTest {
     }
 
     @Test
+    public void testRefreshReceiverFromDataBase() {
+        String newTestName = "NewTestName";
+        Receiver receiver = myDao.getReceiver(testNum);
+        receiver.setName(newTestName);
+        myDao.refreshReceiverFromDataBase(receiver);
+        assertEquals(testName, receiver.getName());
+    }
+
+    @Test
+    public void testRefreshExpenseFromDataBase() {
+        String newTestPayDate = "2023-11-02";
+        int newTestReceiver = 1;
+        double newTestValue = 103.87;
+        Expense expense = myDao.getExpense(testNum);
+        expense.setPayDate(newTestPayDate);
+        expense.setReceiver(newTestReceiver);
+        expense.setValue(newTestValue);
+        myDao.refreshExpenseFromDataBase(expense);
+        assertEquals(testPayDate, expense.getPayDate());
+        assertEquals(Integer.valueOf(testReceiver), expense.getReceiver());
+        assertEquals(Double.valueOf(testValue), expense.getValue());
+    }
+
+    @Test
     public void testDeleteReceiver() throws SQLException, ClassNotFoundException {
         boolean result = myDao.deleteReceiver(testNum);
-        boolean result1 = myDao.deleteReceiver(testNum1);
+        boolean result1 = myDao.deleteReceiver(wrongTestNum);
         assertTrue(result);
         assertFalse(result1);
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {
@@ -166,7 +190,7 @@ public class MyListExpensesDaoTest {
     @Test
     public void testDeleteExpense() throws SQLException, ClassNotFoundException {
         boolean result = myDao.deleteExpense(testNum);
-        boolean result1 = myDao.deleteExpense(testNum1);
+        boolean result1 = myDao.deleteExpense(wrongTestNum);
         assertTrue(result);
         assertFalse(result1);
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {

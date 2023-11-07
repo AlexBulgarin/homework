@@ -136,6 +136,34 @@ public class MyListExpensesDao implements ListExpensesDao {
     }
 
     @Override
+    public void refreshReceiverFromDataBase(Receiver receiver) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.flush();
+            session.refresh(receiver);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void refreshExpenseFromDataBase(Expense expense) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.flush();
+            session.refresh(expense);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public boolean deleteReceiver(int num) {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession()) {

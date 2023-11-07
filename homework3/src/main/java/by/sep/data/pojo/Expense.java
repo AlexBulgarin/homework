@@ -1,5 +1,7 @@
 package by.sep.data.pojo;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,7 +10,8 @@ import java.util.Objects;
 public class Expense {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-increment")
+    @GenericGenerator(name = "system-increment", strategy = "increment")
     @Column(name = "num")
     private Integer num;
 
@@ -83,5 +86,15 @@ public class Expense {
         result = 31 * result + (receiver != null ? receiver.hashCode() : 0);
         result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Expense{" +
+                "num=" + num +
+                ", payDate='" + payDate + '\'' +
+                ", receiver=" + receiver +
+                ", value=" + value +
+                '}';
     }
 }
