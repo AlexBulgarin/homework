@@ -21,7 +21,8 @@
             CREATE TABLE receivers (
             num INT NOT NULL,
             name VARCHAR(255) NULL,
-            PRIMARY KEY (num));
+            PRIMARY KEY (num),
+            UNIQUE (name));
         </sql>
     </changeSet>
 

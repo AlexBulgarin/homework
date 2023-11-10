@@ -26,47 +26,24 @@ public class MyListExpensesDao implements ListExpensesDao {
 
     @Override
     public Receiver getReceiver(int num) {
-        Transaction transaction = null;
-        Receiver receiver;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            receiver = session.get(Receiver.class, num);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
+            return session.get(Receiver.class, num);
         }
-        return receiver;
+
     }
 
     @Override
     public Receiver loadReceiver(int num) {
-        Transaction transaction = null;
-        Receiver receiver;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            receiver = session.load(Receiver.class, num);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
+            return session.load(Receiver.class, num);
         }
-        return receiver;
     }
 
     @Override
     public Expense getExpense(int num) {
-        Transaction transaction = null;
-        Expense expense;
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            expense = session.get(Expense.class, num);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
+            return session.get(Expense.class, num);
         }
-        return expense;
     }
 
     @Override
@@ -133,34 +110,6 @@ public class MyListExpensesDao implements ListExpensesDao {
             throw new RuntimeException(e);
         }
         return true;
-    }
-
-    @Override
-    public void refreshReceiverFromDataBase(Receiver receiver) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.flush();
-            session.refresh(receiver);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void refreshExpenseFromDataBase(Expense expense) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.flush();
-            session.refresh(expense);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw new RuntimeException(e);
-        }
     }
 
     @Override

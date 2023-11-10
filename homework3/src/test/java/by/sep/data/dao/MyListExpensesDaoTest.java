@@ -4,6 +4,9 @@ import by.sep.data.ListExpensesTestDataSource;
 import by.sep.data.ListExpensesTestSessionFactory;
 import by.sep.data.pojo.Expense;
 import by.sep.data.pojo.Receiver;
+import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -149,30 +152,6 @@ public class MyListExpensesDaoTest {
     }
 
     @Test
-    public void testRefreshReceiverFromDataBase() {
-        String newTestName = "NewTestName";
-        Receiver receiver = myDao.getReceiver(testNum);
-        receiver.setName(newTestName);
-        myDao.refreshReceiverFromDataBase(receiver);
-        assertEquals(testName, receiver.getName());
-    }
-
-    @Test
-    public void testRefreshExpenseFromDataBase() {
-        String newTestPayDate = "2023-11-02";
-        int newTestReceiver = 1;
-        double newTestValue = 103.87;
-        Expense expense = myDao.getExpense(testNum);
-        expense.setPayDate(newTestPayDate);
-        expense.setReceiver(newTestReceiver);
-        expense.setValue(newTestValue);
-        myDao.refreshExpenseFromDataBase(expense);
-        assertEquals(testPayDate, expense.getPayDate());
-        assertEquals(Integer.valueOf(testReceiver), expense.getReceiver());
-        assertEquals(Double.valueOf(testValue), expense.getValue());
-    }
-
-    @Test
     public void testDeleteReceiver() throws SQLException, ClassNotFoundException {
         boolean result = myDao.deleteReceiver(testNum);
         boolean result1 = myDao.deleteReceiver(wrongTestNum);
@@ -199,6 +178,36 @@ public class MyListExpensesDaoTest {
             resultSet.next();
             int count = resultSet.getInt(1);
             assertEquals(0, count);
+        }
+    }
+
+    @Test //flush method testing
+    public void testSaveAfterDeletion() throws SQLException, ClassNotFoundException {
+        try (Session session = ListExpensesTestSessionFactory.getSessionFactory().openSession();
+             Connection connection = ListExpensesTestDataSource.getConnection()) {
+            session.setHibernateFlushMode(FlushMode.COMMIT);
+            Transaction transaction = session.beginTransaction();
+            Receiver receiver = myDao.getReceiver(testNum);
+            session.delete(receiver);
+            session.flush();
+            session.save(new Receiver(null, testName));
+            transaction.commit();
+
+            ResultSet resultSet = connection.createStatement().
+                    executeQuery("SELECT COUNT(*) FROM ListExpenses_test.receivers;");
+            resultSet.next();
+            int count = resultSet.getInt(1);
+            assertEquals(1, count);
+        }
+    }
+
+    @Test //refresh method testing
+    public void testRefreshAfterUpdate() {
+        try (Session session = ListExpensesTestSessionFactory.getSessionFactory().openSession()) {
+            Receiver receiver = myDao.getReceiver(testNum);
+            receiver.setName("New Test Name");
+            session.refresh(receiver);
+            assertEquals(testName, receiver.getName());
         }
     }
 }

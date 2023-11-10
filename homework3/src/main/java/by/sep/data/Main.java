@@ -7,6 +7,14 @@ import by.sep.data.pojo.Receiver;
 import java.util.Scanner;
 
 public class Main {
+    private static final MyListExpensesDao DAO = MyListExpensesDao.getInstance(ListExpensesSessionFactory.getSessionFactory());
+
+    public static void main(String[] args) {
+        init();
+        getMenu();
+    }
+
+
     private static void init() {
         getInfo();
     }
@@ -17,10 +25,8 @@ public class Main {
                 "\nupdateExpense\ndeleteReceiver\ndeleteExpense\nexit");
     }
 
-    public static void main(String[] args) {
-        MyListExpensesDao dao = MyListExpensesDao.getInstance(ListExpensesSessionFactory.getSessionFactory());
+    private static void getMenu() {
         try (Scanner scanner = new Scanner(System.in)) {
-            init();
             while (true) {
                 String action = scanner.next();
                 switch (action) {
@@ -29,15 +35,15 @@ public class Main {
                         break;
                     case "getReceiver":
                         System.out.println("Enter receiver ID");
-                        System.out.println(dao.getReceiver(scanner.nextInt()));
+                        System.out.println(DAO.getReceiver(scanner.nextInt()));
                         break;
                     case "getExpense":
                         System.out.println("Enter expense ID");
-                        System.out.println(dao.getExpense(scanner.nextInt()));
+                        System.out.println(DAO.getExpense(scanner.nextInt()));
                         break;
                     case "saveReceiver":
                         System.out.println("Enter receiver name");
-                        System.out.println("Added id:" + dao.addReceiver(new Receiver(null, scanner.next())));
+                        System.out.println("Added id:" + DAO.addReceiver(new Receiver(null, scanner.next())));
                         break;
                     case "saveExpense":
                         System.out.println("Enter expense paydate");
@@ -46,14 +52,14 @@ public class Main {
                         int receiver = scanner.nextInt();
                         System.out.println("Enter expense value");
                         double value = scanner.nextDouble();
-                        System.out.println("Added id:" + dao.addExpense(new Expense(null, date, receiver, value)));
+                        System.out.println("Added id:" + DAO.addExpense(new Expense(null, date, receiver, value)));
                         break;
                     case "updateReceiver":
                         System.out.println("Enter receiver ID");
                         int receiverNum = scanner.nextInt();
                         System.out.println("Enter receiver new name");
                         String newName = scanner.next();
-                        System.out.println(dao.updateReceiver(receiverNum, newName));
+                        System.out.println(DAO.updateReceiver(receiverNum, newName));
                         break;
                     case "updateExpense":
                         System.out.println("Enter expense ID");
@@ -64,15 +70,15 @@ public class Main {
                         int newReceiver = scanner.nextInt();
                         System.out.println("Enter expense value");
                         double newValue = scanner.nextDouble();
-                        System.out.println(dao.updateExpense(expenseNum, newDate, newReceiver, newValue));
+                        System.out.println(DAO.updateExpense(expenseNum, newDate, newReceiver, newValue));
                         break;
                     case "deleteReceiver":
                         System.out.println("Enter receiver ID");
-                        System.out.println(dao.deleteReceiver(scanner.nextInt()));
+                        System.out.println(DAO.deleteReceiver(scanner.nextInt()));
                         break;
                     case "deleteExpense":
                         System.out.println("Enter expense ID");
-                        System.out.println(dao.deleteExpense(scanner.nextInt()));
+                        System.out.println(DAO.deleteExpense(scanner.nextInt()));
                         break;
                     case "exit":
                         return;

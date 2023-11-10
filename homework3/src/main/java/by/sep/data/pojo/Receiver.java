@@ -15,7 +15,7 @@ public class Receiver {
     @Column(name = "num")
     private Integer num;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     public Receiver() {

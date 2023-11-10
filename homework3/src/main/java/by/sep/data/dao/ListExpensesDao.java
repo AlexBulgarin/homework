@@ -18,10 +18,6 @@ public interface ListExpensesDao {
 
     boolean updateExpense(int num, String newPayDate, int newReceiver, double newValue);
 
-    void refreshReceiverFromDataBase(Receiver receiver);
-
-    void refreshExpenseFromDataBase(Expense expense);
-
     boolean deleteReceiver(int num);
 
     boolean deleteExpense(int num);
