@@ -22,4 +22,6 @@ public interface ListExpensesDao {
 
     boolean deleteExpense(int num);
 
+    void refreshReceiver(Receiver receiver);
+
 }

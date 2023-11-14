@@ -143,4 +143,14 @@ public class MyListExpensesDao implements ListExpensesDao {
         }
         return true;
     }
+
+    @Override
+    public void refreshReceiver(Receiver receiver) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.flush();
+            session.refresh(receiver);
+            transaction.commit();
+        }
+    }
 }

@@ -4,21 +4,17 @@ import by.sep.data.ListExpensesTestDataSource;
 import by.sep.data.ListExpensesTestSessionFactory;
 import by.sep.data.pojo.Expense;
 import by.sep.data.pojo.Receiver;
-import org.hibernate.FlushMode;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
 public class MyListExpensesDaoTest {
-    MyListExpensesDao myDao;
+    static MyListExpensesDao myDao;
     int testNum = 1;
     int wrongTestNum = 99;
     String testName = "Test Name";
@@ -26,9 +22,13 @@ public class MyListExpensesDaoTest {
     int testReceiver = 1;
     double testValue = 125.58;
 
+    @BeforeClass
+    public static void beforeClass() {
+        myDao = MyListExpensesDao.getInstance(ListExpensesTestSessionFactory.getSessionFactory());
+    }
+
     @Before
     public void setUp() throws Exception {
-        myDao = MyListExpensesDao.getInstance(ListExpensesTestSessionFactory.getSessionFactory());
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {
             connection.createStatement()
                     .executeUpdate("truncate table receivers");
@@ -45,13 +45,17 @@ public class MyListExpensesDaoTest {
 
     @After
     public void tearDown() throws Exception {
-        myDao = null;
         try (Connection connection = ListExpensesTestDataSource.getConnection()) {
             connection.createStatement()
                     .executeUpdate("truncate table receivers");
             connection.createStatement()
                     .executeUpdate("truncate table expenses");
         }
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        myDao = null;
     }
 
     @Test
@@ -181,33 +185,22 @@ public class MyListExpensesDaoTest {
         }
     }
 
-    @Test //flush method testing
-    public void testSaveAfterDeletion() throws SQLException, ClassNotFoundException {
-        try (Session session = ListExpensesTestSessionFactory.getSessionFactory().openSession();
-             Connection connection = ListExpensesTestDataSource.getConnection()) {
-            session.setHibernateFlushMode(FlushMode.COMMIT);
-            Transaction transaction = session.beginTransaction();
-            Receiver receiver = myDao.getReceiver(testNum);
-            session.delete(receiver);
-            session.flush();
-            session.save(new Receiver(null, testName));
-            transaction.commit();
-
-            ResultSet resultSet = connection.createStatement().
-                    executeQuery("SELECT COUNT(*) FROM ListExpenses_test.receivers;");
-            resultSet.next();
-            int count = resultSet.getInt(1);
-            assertEquals(1, count);
-        }
-    }
-
-    @Test //refresh method testing
-    public void testRefreshAfterUpdate() {
-        try (Session session = ListExpensesTestSessionFactory.getSessionFactory().openSession()) {
-            Receiver receiver = myDao.getReceiver(testNum);
-            receiver.setName("New Test Name");
-            session.refresh(receiver);
-            assertEquals(testName, receiver.getName());
+    @Test
+    public void testRefreshReceiver() throws SQLException, ClassNotFoundException {
+        try (Connection connection = ListExpensesTestDataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "CREATE TRIGGER `trigger`\n" +
+                            "BEFORE INSERT\n" +
+                            "ON receivers FOR EACH ROW\n" +
+                            "set NEW.name = UPPER(NEW.name);");
+            preparedStatement.executeUpdate();
+            Receiver receiver = new Receiver(null, "TriggerTestName");
+            myDao.addReceiver(receiver);
+            myDao.refreshReceiver(receiver);
+            preparedStatement = connection.prepareStatement("DROP TRIGGER `trigger`");
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            assertEquals("TRIGGERTESTNAME", receiver.getName());
         }
     }
 }
