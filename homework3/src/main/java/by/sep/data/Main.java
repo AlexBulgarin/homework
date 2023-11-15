@@ -116,7 +116,7 @@ public class Main {
     }
 
     private static void saveExpense(Scanner scanner) {
-        System.out.println("Enter expense paydate");
+        System.out.println("Enter expense date of payment");
         String date = scanner.next();
         checkDate(date);
         System.out.println(ENTER_RECEIVER_ID);
@@ -135,7 +135,7 @@ public class Main {
         System.out.println(ENTER_RECEIVER_ID);
         int receiverIdToUpdate = scanner.nextInt();
         System.out.println("Enter receiver new name");
-        String newName = scanner.next();//check for null
+        String newName = scanner.next();
         boolean updateReceiverResult = DAO.updateReceiver(receiverIdToUpdate, newName);
         if (!updateReceiverResult) {
             System.out.println(NO_RECEIVER);
@@ -147,7 +147,7 @@ public class Main {
     private static void updateExpense(Scanner scanner) {
         System.out.println(ENTER_EXPENSE_ID);
         int expenseIdToUpdate = scanner.nextInt();
-        System.out.println("Enter expense paydate");
+        System.out.println("Enter expense date of payment");
         String newDate = scanner.next();
         checkDate(newDate);
         System.out.println(ENTER_RECEIVER_ID);
