@@ -1,2 +1,2 @@
 # jd2_homework
-IT-Academy Homework Java Enterprise
+IT-Academy Java Enterprise Homework
