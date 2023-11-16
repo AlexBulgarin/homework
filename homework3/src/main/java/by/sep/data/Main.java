@@ -183,6 +183,6 @@ public class Main {
             System.out.println(NO_EXPENSE);
             System.exit(2);
         }
-        System.out.println("Receiver was successfully deleted");
+        System.out.println("Expense was successfully deleted");
     }
 }

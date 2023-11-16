@@ -56,7 +56,7 @@
                             <goal>update</goal>
                         </goals>
                         <configuration>
-                            <url>jdbc:mysql://localhost:3306/homework4?createDatabaseIfNotExist=true</url>
+                            <url>jdbc:mysql://localhost:3306/hw4?createDatabaseIfNotExist=true</url>
                         </configuration>
                     </execution>
                 </executions>
