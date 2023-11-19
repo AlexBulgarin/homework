@@ -1,9 +1,18 @@
-package by.sep.data.pojos;
+package by.sep.data.pojos.character;
 
-public class GameCharacterStatistics {
+public class CharacterStatistics {
     private Integer healthPoints;
     private Integer strength;
     private Integer intellect;
+
+    public CharacterStatistics() {
+    }
+
+    public CharacterStatistics(Integer healthPoints, Integer strength, Integer intellect) {
+        this.healthPoints = healthPoints;
+        this.strength = strength;
+        this.intellect = intellect;
+    }
 
     public Integer getHealthPoints() {
         return healthPoints;
@@ -27,14 +36,5 @@ public class GameCharacterStatistics {
 
     public void setIntellect(Integer intellect) {
         this.intellect = intellect;
-    }
-
-    @Override
-    public String toString() {
-        return "GameCharacterStatistics{" +
-                "healthPoints=" + healthPoints +
-                ", strength=" + strength +
-                ", intellect=" + intellect +
-                '}';
     }
 }
