@@ -12,5 +12,9 @@
         <mapping class="by.sep.data.pojos.character.Character"/>
         <mapping class="by.sep.data.pojos.character.Warrior"/>
         <mapping class="by.sep.data.pojos.character.Mage"/>
+
+        <mapping class="by.sep.data.pojos.insurance.Insurance"/>
+        <mapping class="by.sep.data.pojos.insurance.AutoInsurance"/>
+        <mapping class="by.sep.data.pojos.insurance.TravelInsurance"/>
     </session-factory>
 </hibernate-configuration>

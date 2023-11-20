@@ -84,46 +84,51 @@ public class CharacterDaoImplTest {
 
     @Test
     public void read() {
-        Warrior acquiredWarrior = (Warrior) dao.read(testWarriorId);
-        Mage acquiredMage = (Mage) dao.read(testMageId);
+        Warrior warrior = (Warrior) dao.read(testWarriorId);
+        Mage mage = (Mage) dao.read(testMageId);
 
-        assertEquals(testWarriorId, acquiredWarrior.getCharacterId().intValue());
-        assertEquals(testWarriorName, acquiredWarrior.getCharacterName());
-        assertEquals(testWarriorHealthPoints, acquiredWarrior.getCharacterStatistics().getHealthPoints().intValue());
-        assertEquals(testWarriorStrength, acquiredWarrior.getCharacterStatistics().getStrength().intValue());
-        assertEquals(testWarriorIntellect, acquiredWarrior.getCharacterStatistics().getIntellect().intValue());
-        assertEquals(testRagePoints, acquiredWarrior.getRagePoints().intValue());
+        assertEquals(testWarriorId, warrior.getCharacterId().intValue());
+        assertEquals(testWarriorName, warrior.getCharacterName());
+        assertEquals(testWarriorHealthPoints, warrior.getCharacterStatistics().getHealthPoints().intValue());
+        assertEquals(testWarriorStrength, warrior.getCharacterStatistics().getStrength().intValue());
+        assertEquals(testWarriorIntellect, warrior.getCharacterStatistics().getIntellect().intValue());
+        assertEquals(testRagePoints, warrior.getRagePoints().intValue());
 
-        assertEquals(testMageId, acquiredMage.getCharacterId().intValue());
-        assertEquals(testMageName, acquiredMage.getCharacterName());
-        assertEquals(testMageHealthPoints, acquiredMage.getCharacterStatistics().getHealthPoints().intValue());
-        assertEquals(testMageStrength, acquiredMage.getCharacterStatistics().getStrength().intValue());
-        assertEquals(testMageIntellect, acquiredMage.getCharacterStatistics().getIntellect().intValue());
-        assertEquals(testManaPoints, acquiredMage.getManaPoints().intValue());
+        assertEquals(testMageId, mage.getCharacterId().intValue());
+        assertEquals(testMageName, mage.getCharacterName());
+        assertEquals(testMageHealthPoints, mage.getCharacterStatistics().getHealthPoints().intValue());
+        assertEquals(testMageStrength, mage.getCharacterStatistics().getStrength().intValue());
+        assertEquals(testMageIntellect, mage.getCharacterStatistics().getIntellect().intValue());
+        assertEquals(testManaPoints, mage.getManaPoints().intValue());
 
     }
 
     @Test
     public void update() throws SQLException {
-        String updatedTestName = "Updated Test Name";
-        int updatedTestHealthPoints = 200;
-        int updatedTestStrength = 20;
-        int updatedTestIntellect = 20;
-        dao.update(testWarriorId, updatedTestName, new CharacterStatistics(
-                updatedTestHealthPoints, updatedTestStrength, updatedTestIntellect));
+        String newTestName = "Updated Test Name";
+        int newTestHealthPoints = 200;
+        int newTestStrength = 20;
+        int newTestIntellect = 20;
+
+        boolean result = dao.update(testWarriorId, newTestName, new CharacterStatistics(
+                newTestHealthPoints, newTestStrength, newTestIntellect));
+
+        assertTrue(result);
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM T_CHARACTER " +
                 "WHERE characterId=" + testWarriorId + ";");
         resultSet.next();
-        assertEquals(updatedTestName, resultSet.getString("characterName"));
-        assertEquals(updatedTestHealthPoints, resultSet.getInt("healthPoints"));
-        assertEquals(updatedTestStrength, resultSet.getInt("strength"));
-        assertEquals(updatedTestIntellect, resultSet.getInt("intellect"));
+        assertEquals(newTestName, resultSet.getString("characterName"));
+        assertEquals(newTestHealthPoints, resultSet.getInt("healthPoints"));
+        assertEquals(newTestStrength, resultSet.getInt("strength"));
+        assertEquals(newTestIntellect, resultSet.getInt("intellect"));
 
     }
 
     @Test
     public void delete() throws SQLException {
-        dao.delete(1);
+        boolean result = dao.delete(testMageId);
+
+        assertTrue(result);
         ResultSet resultSet = connection.createStatement()
                 .executeQuery("SELECT COUNT(*) FROM T_CHARACTER;");
         resultSet.next();

@@ -11,5 +11,4 @@ public interface CharacterDao {
     boolean update(int id, String newName, CharacterStatistics newStatistics);
 
     boolean delete(int id);
-
 }
