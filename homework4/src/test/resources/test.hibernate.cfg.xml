@@ -16,5 +16,9 @@
         <mapping class="by.sep.data.pojos.insurance.Insurance"/>
         <mapping class="by.sep.data.pojos.insurance.AutoInsurance"/>
         <mapping class="by.sep.data.pojos.insurance.TravelInsurance"/>
+
+        <mapping class="by.sep.data.pojos.employee.Employee"/>
+        <mapping class="by.sep.data.pojos.employee.Manager"/>
+        <mapping class="by.sep.data.pojos.employee.Driver"/>
     </session-factory>
 </hibernate-configuration>

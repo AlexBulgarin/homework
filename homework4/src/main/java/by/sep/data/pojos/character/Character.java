@@ -10,7 +10,7 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "CHARACTER_TYPE", discriminatorType = DiscriminatorType.CHAR)
 @DiscriminatorValue("C")
-public abstract class Character {
+public class Character {
     @Id
     @GeneratedValue(generator = "system-increment")
     @GenericGenerator(name = "system-increment", strategy = "increment")

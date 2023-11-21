@@ -1,6 +1,7 @@
 package by.sep.data.dao;
 
 import by.sep.data.pojos.insurance.AutoInsurance;
+import by.sep.data.pojos.insurance.Insurance;
 import by.sep.data.pojos.insurance.InsuranceInfo;
 import by.sep.data.pojos.insurance.TravelInsurance;
 import by.sep.data.util.Hw4TestDataSource;
@@ -19,6 +20,7 @@ public class InsuranceDaoImplTest {
     static Connection connection;
     String testId1 = UUID.randomUUID().toString();
     String testId2 = UUID.randomUUID().toString();
+    String wrongId = UUID.randomUUID().toString();
     String testInsurantName = "Test Name";
     double testPrice = 99.99;
     int testDuration = 12;
@@ -107,6 +109,7 @@ public class InsuranceDaoImplTest {
     public void testRead() {
         AutoInsurance autoInsurance = (AutoInsurance) dao.read(testId1);
         TravelInsurance travelInsurance = (TravelInsurance) dao.read(testId2);
+        Insurance nullInsurance = dao.read(wrongId);
 
         assertEquals(testId1, autoInsurance.getInsuranceId());
         assertEquals(testInsurantName, autoInsurance.getInsurantName());
@@ -121,6 +124,8 @@ public class InsuranceDaoImplTest {
         assertEquals(testDuration, travelInsurance.getInsuranceInfo().getInsuranceDuration().intValue());
         assertEquals(testCountryOfVisit, travelInsurance.getCountryOfVisit());
         assertEquals(testVisaNumber, travelInsurance.getVisaNumber());
+
+        assertNull(nullInsurance);
     }
 
     @Test
@@ -130,8 +135,10 @@ public class InsuranceDaoImplTest {
         int newTestDuration = 24;
 
         boolean result = dao.update(testId2, newTestInsurantName, new InsuranceInfo(newTestPrice, newTestDuration));
+        boolean falseResult = dao.update(wrongId, newTestInsurantName, new InsuranceInfo(newTestPrice, newTestDuration));
 
         assertTrue(result);
+        assertFalse(falseResult);
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM T_INSURANCE " +
                 "WHERE insuranceId='" + testId2 + "';");
         resultSet.next();
@@ -143,8 +150,10 @@ public class InsuranceDaoImplTest {
     @Test
     public void testDelete() throws SQLException {
         boolean result = dao.delete(testId1);
+        boolean falseResult = dao.delete(wrongId);
 
         assertTrue(result);
+        assertFalse(falseResult);
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT COUNT(*) FROM T_INSURANCE;");
         resultSet.next();
         int actualCount = resultSet.getInt(1);

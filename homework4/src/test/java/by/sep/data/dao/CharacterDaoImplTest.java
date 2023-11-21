@@ -19,6 +19,7 @@ public class CharacterDaoImplTest {
     static Connection connection;
     int testWarriorId = 1;
     int testMageId = 2;
+    int wrongId = 999;
     String testWarriorName = "Test Warrior Name";
     String testMageName = "Test Mage Name";
     int testWarriorHealthPoints = 100;
@@ -86,6 +87,7 @@ public class CharacterDaoImplTest {
     public void read() {
         Warrior warrior = (Warrior) dao.read(testWarriorId);
         Mage mage = (Mage) dao.read(testMageId);
+        Character nullCharacter = dao.read(wrongId);
 
         assertEquals(testWarriorId, warrior.getCharacterId().intValue());
         assertEquals(testWarriorName, warrior.getCharacterName());
@@ -101,6 +103,7 @@ public class CharacterDaoImplTest {
         assertEquals(testMageIntellect, mage.getCharacterStatistics().getIntellect().intValue());
         assertEquals(testManaPoints, mage.getManaPoints().intValue());
 
+        assertNull(nullCharacter);
     }
 
     @Test
@@ -112,8 +115,11 @@ public class CharacterDaoImplTest {
 
         boolean result = dao.update(testWarriorId, newTestName, new CharacterStatistics(
                 newTestHealthPoints, newTestStrength, newTestIntellect));
+        boolean falseResult = dao.update(wrongId, newTestName, new CharacterStatistics(
+                newTestHealthPoints, newTestStrength, newTestIntellect));
 
         assertTrue(result);
+        assertFalse(falseResult);
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM T_CHARACTER " +
                 "WHERE characterId=" + testWarriorId + ";");
         resultSet.next();
@@ -127,8 +133,10 @@ public class CharacterDaoImplTest {
     @Test
     public void delete() throws SQLException {
         boolean result = dao.delete(testMageId);
+        boolean falseResult = dao.delete(wrongId);
 
         assertTrue(result);
+        assertFalse(falseResult);
         ResultSet resultSet = connection.createStatement()
                 .executeQuery("SELECT COUNT(*) FROM T_CHARACTER;");
         resultSet.next();
