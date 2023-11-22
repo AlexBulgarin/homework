@@ -18,8 +18,7 @@ public class Employee {
             parameters = {
                     @Parameter(name = "sequence_name", value = "hilo_sequence"),
                     @Parameter(name = "initial_value", value = "5"),
-                    @Parameter(name = "increment_size", value = "3"),
-                    @Parameter(name = "optimizer", value = "hilo")
+                    @Parameter(name = "increment_size", value = "3")
             }
     )
     private Long employeeId;
