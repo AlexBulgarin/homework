@@ -4,9 +4,9 @@
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd"
-default-init-method="defaultInit" default-destroy-method="defaultDestroy">
+       default-init-method="defaultInit" default-destroy-method="defaultDestroy">
 
-    <bean id="student" class="by.sep.task2.Student" factory-method="getInstance">
+    <bean id="student" class="by.sep.Student" factory-method="getInstance">
         <property name="firstName" value="Peter"/>
         <property name="lastName" value="Parker"/>
         <property name="marks">
@@ -16,5 +16,12 @@ default-init-method="defaultInit" default-destroy-method="defaultDestroy">
                 <entry key="Biology" value="B"/>
             </map>
         </property>
+        <property name="studentInfo" ref="studentInfo"/>
     </bean>
-       </beans>
+
+    <bean id="studentInfo" class="by.sep.StudentInfo">
+        <property name="studentCardNumber" value="S00123"/>
+        <property name="recordBookNumber" value="R00435"/>
+        <property name="libraryCardNumber" value="L00342"/>
+    </bean>
+</beans>

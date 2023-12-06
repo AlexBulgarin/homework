@@ -1,7 +1,8 @@
-package by.sep.task2;
+package by.sep;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
 
@@ -9,6 +10,8 @@ public class Student implements InitializingBean, DisposableBean {
     private String firstName;
     private String lastName;
     private Map<String, String> marks;
+    @Autowired
+    private StudentInfo studentInfo;
 
     public static Student getInstance() {
         return new Student();
@@ -54,5 +57,13 @@ public class Student implements InitializingBean, DisposableBean {
 
     public void setMarks(Map<String, String> marks) {
         this.marks = marks;
+    }
+
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
+    }
+
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
     }
 }
