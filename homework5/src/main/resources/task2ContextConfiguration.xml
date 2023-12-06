@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd"
+default-init-method="defaultInit" default-destroy-method="defaultDestroy">
+
+    <bean id="student" class="by.sep.task2.Student" factory-method="getInstance">
+        <property name="firstName" value="Peter"/>
+        <property name="lastName" value="Parker"/>
+        <property name="marks">
+            <map>
+                <entry key="Math" value="A"/>
+                <entry key="Physics" value="A"/>
+                <entry key="Biology" value="B"/>
+            </map>
+        </property>
+    </bean>
+       </beans>
