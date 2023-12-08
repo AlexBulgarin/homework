@@ -1,6 +1,6 @@
 package by.sep;
 
-public class StudentInfo {
+public class StudentInfo implements IStudentInfo {
     private String studentCardNumber;
     private String recordBookNumber;
     private String libraryCardNumber;

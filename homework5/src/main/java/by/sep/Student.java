@@ -3,6 +3,7 @@ package by.sep;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Map;
 
@@ -11,7 +12,8 @@ public class Student implements InitializingBean, DisposableBean {
     private String lastName;
     private Map<String, String> marks;
     @Autowired
-    private StudentInfo studentInfo;
+    @Qualifier("studentInfo")
+    private IStudentInfo studentInfo;
 
     public static Student getInstance() {
         return new Student();
@@ -59,11 +61,11 @@ public class Student implements InitializingBean, DisposableBean {
         this.marks = marks;
     }
 
-    public StudentInfo getStudentInfo() {
+    public IStudentInfo getStudentInfo() {
         return studentInfo;
     }
 
-    public void setStudentInfo(StudentInfo studentInfo) {
+    public void setStudentInfo(IStudentInfo studentInfo) {
         this.studentInfo = studentInfo;
     }
 }

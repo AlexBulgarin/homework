@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
-    http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd"
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd"
        default-init-method="defaultInit" default-destroy-method="defaultDestroy">
+
+    <c:annotation-config/>
+    <c:property-placeholder location="classpath:master.properties"/>
+    <c:component-scan base-package="by.sep">
+        <c:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </c:component-scan>
 
     <bean id="student" class="by.sep.Student" factory-method="getInstance">
         <property name="firstName" value="Peter"/>
@@ -16,7 +25,6 @@
                 <entry key="Biology" value="B"/>
             </map>
         </property>
-        <property name="studentInfo" ref="studentInfo"/>
     </bean>
 
     <bean id="studentInfo" class="by.sep.StudentInfo">
@@ -24,4 +32,5 @@
         <property name="recordBookNumber" value="R00435"/>
         <property name="libraryCardNumber" value="L00342"/>
     </bean>
+
 </beans>

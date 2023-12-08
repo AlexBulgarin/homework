@@ -1,28 +1,23 @@
 package by.sep;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.AbstractMap;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:beans.xml"})
 public class Homework5Test {
-    static ClassPathXmlApplicationContext context;
-    static Student student;
-
-    @BeforeClass
-    public static void beforeClass() {
-        context = new ClassPathXmlApplicationContext("Beans.xml");
-        student = (Student) context.getBean("student");
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        context.close();
-    }
+    @Autowired
+    Student student;
+    @Autowired
+    Master master;
 
     @Test
     public void testTask2() {
@@ -35,11 +30,21 @@ public class Homework5Test {
         assertTrue(student.getMarks().entrySet().contains(new AbstractMap.SimpleEntry<>("Biology", "B")));
     }
 
+    @Test
+    public void testTask8and9() {
+        StudentInfo info = (StudentInfo) student.getStudentInfo();
+        assertEquals("S00123", info.getStudentCardNumber());
+        assertEquals("R00435", info.getRecordBookNumber());
+        assertEquals("L00342", info.getLibraryCardNumber());
+    }
 
     @Test
-    public void testTask8() {
-        assertEquals("S00123", student.getStudentInfo().getStudentCardNumber());
-        assertEquals("R00435", student.getStudentInfo().getRecordBookNumber());
-        assertEquals("L00342", student.getStudentInfo().getLibraryCardNumber());
+    public void testTask10() {
+        assertNotNull(master);
+        assertEquals("Curt", master.getFirstName());
+        assertEquals("Connors", master.getLastName());
+        StudentInfo2 info2 = (StudentInfo2) master.getStudentInfo();
+        assertEquals("radio-physics", info2.getFaculty());
+        assertEquals("rad-3", info2.getGroup());
     }
 }
