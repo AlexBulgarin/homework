@@ -10,9 +10,10 @@
        default-init-method="defaultInit" default-destroy-method="defaultDestroy">
 
     <c:annotation-config/>
-    <c:property-placeholder location="classpath:master.properties"/>
+    <c:property-placeholder location="classpath:homework5.properties"/>
     <c:component-scan base-package="by.sep">
         <c:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <c:exclude-filter type="assignable" expression="by.sep.Doctor"/>
     </c:component-scan>
 
     <bean id="student" class="by.sep.Student" factory-method="getInstance">
@@ -32,5 +33,4 @@
         <property name="recordBookNumber" value="R00435"/>
         <property name="libraryCardNumber" value="L00342"/>
     </bean>
-
 </beans>

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StudentInfo2 implements IStudentInfo {
-    @Value("${faculty}")
+    @Value("${master.faculty}")
     private String faculty;
-    @Value("${group}")
+    @Value("${master.group}")
     private String group;
 
     public String getFaculty() {

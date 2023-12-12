@@ -17,6 +17,8 @@ public class Homework5Test {
     Student student;
     @Autowired
     Master master;
+    @Autowired(required = false)
+    Doctor doctor;
 
     @Test
     public void testTask2() {
@@ -30,7 +32,7 @@ public class Homework5Test {
     }
 
     @Test
-    public void testTask8and9() {
+    public void testTask8() {
         StudentInfo info = (StudentInfo) student.getStudentInfo();
         assertEquals("S00123", info.getStudentCardNumber());
         assertEquals("R00435", info.getRecordBookNumber());
@@ -38,12 +40,17 @@ public class Homework5Test {
     }
 
     @Test
-    public void testTask10() {
+    public void testTask9() {
         assertNotNull(master);
-        assertEquals("Curt", master.getFirstName());
-        assertEquals("Connors", master.getLastName());
+        assertEquals("Michael", master.getFirstName());
+        assertEquals("Morbius", master.getLastName());
         StudentInfo2 info2 = (StudentInfo2) master.getStudentInfo();
-        assertEquals("radio-physics", info2.getFaculty());
+        assertEquals("bioengineering", info2.getFaculty());
         assertEquals("rad-3", info2.getGroup());
+    }
+
+    @Test
+    public void testTask10() {
+        assertNull(doctor);
     }
 }
