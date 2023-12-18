@@ -28,9 +28,9 @@ public class BaseDao<T> implements Dao<T> {
     }
 
     @Override
-    public T read(Class clazz, Serializable id) {
+    public T read(Class<T> clazz, Serializable id) {
         Session session = sessionFactory.getCurrentSession();
-        return (T) session.get(clazz, id);
+        return session.get(clazz, id);
     }
 
     @Override
