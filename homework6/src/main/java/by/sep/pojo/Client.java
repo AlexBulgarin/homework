@@ -4,8 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.id.uuid.UuidGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Objects;
 
@@ -13,7 +12,7 @@ import java.util.Objects;
 @Table(name = "t_client")
 public class Client {
     @Id
-    @GenericGenerator(name = "uuid", type = UuidGenerator.class)
+    @UuidGenerator
     @Column(name = "client_id")
     private String id;
     @Column(name = "first_name")

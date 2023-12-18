@@ -1,10 +1,11 @@
 package by.sep;
 
-import by.sep.pojo.Account;
+import by.sep.pojo.Product;
 import by.sep.pojo.Client;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,12 +29,14 @@ public class DataConfiguration {
     public Properties hibernateProperties(
             @Value("${hibernate.show_sql}") String showSql,
             @Value("true") String debug,
-            @Value("${hibernate.dialect}") String dialect
+            @Value("${hibernate.dialect}") String dialect,
+            @Value("${hibernate.hbm2ddl.auto}") String hbm2ddl
     ) {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.show_sql", showSql);
         hibernateProperties.put("debug", debug);
         hibernateProperties.put("hibernate.dialect", dialect);
+        hibernateProperties.put("hibernate.hbm2ddl.auto", hbm2ddl);
         return hibernateProperties;
     }
 
@@ -58,7 +61,7 @@ public class DataConfiguration {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource,
-                                                  Properties hibernateProperties) {
+                                                  @Qualifier("hibernateProperties") Properties hibernateProperties) {
         LocalSessionFactoryBean sessionFactory =
                 new LocalSessionFactoryBean();
 
@@ -66,7 +69,7 @@ public class DataConfiguration {
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setAnnotatedClasses(
                 Client.class,
-                Account.class
+                Product.class
         );
         return sessionFactory;
     }

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public interface Dao<T> {
     String create(T t);
 
-    T read(Serializable id);
+    T read(Class<T> clazz, Serializable id);
 
     boolean update(T t);
 
